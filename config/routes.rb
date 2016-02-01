@@ -1,4 +1,6 @@
 PicBlender::Application.routes.draw do
+  devise_for :users
+  devise_for :views
   root "grams#index"
   resources :grams, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
