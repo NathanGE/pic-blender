@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GramsController, type: :controller do
-  describe "grams#destroy" do
+  describe "grams#destroy action" do
     it "shouldn't let a user who did not create the gram destroy the gram" do
       gram = FactoryGirl.create(:gram)
       user = FactoryGirl.create(:user)
@@ -33,7 +33,7 @@ RSpec.describe GramsController, type: :controller do
     end
   end
 
-  describe "grams#update" do
+  describe "grams#update action" do
     it "shouldn't let a user who did not create the gram update the gram" do
       gram = FactoryGirl.create(:gram)
       user = FactoryGirl.create(:user)
@@ -148,7 +148,11 @@ RSpec.describe GramsController, type: :controller do
       user = FactoryGirl.create(:user)
       sign_in user
 
-      post :create, gram: {message: "Hello!"}
+      post :create, gram: {
+        message: "Hello!",
+        picture: fixture_file_upload("/picture.png", 'img/png')
+      }
+
       expect(response).to redirect_to root_path
 
       gram = Gram.last
